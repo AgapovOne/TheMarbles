@@ -1,9 +1,11 @@
+#if canImport(UIKit)
 import UIKit
+#endif
 
 struct Appearance {
 
     static func setup() {
-
+#if canImport(UIKit)
         let barAppearance = UINavigationBarAppearance()
         barAppearance.configureWithOpaqueBackground()
         barAppearance.backgroundColor = UIColor(.navigationBarColor)
@@ -18,6 +20,6 @@ struct Appearance {
         UINavigationBar.appearance().standardAppearance = barAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = barAppearance
         UINavigationBar.appearance().tintColor = UIColor(.primary)
-        
+        #endif
     }
 }

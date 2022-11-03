@@ -5,7 +5,7 @@ struct ListHeader: View {
     let text: String
     var body: some View {
         Text(text)
-            .font(Font.custom("Avenir-Heavy", size: 16))
+            .font(Font.title3)
             .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
     }
 }

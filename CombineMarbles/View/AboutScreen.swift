@@ -31,11 +31,13 @@ struct AboutScreen: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 24)
             .padding(.bottom, 20)
-            
+
+#if os(iOS)
             if let url = Bundle.main.url(forResource: "about", withExtension: "mov") {
                 VideoPlayer(url: url)
                     .frame(height: 300)
             }
+            #endif
 
             Text(
                 "Each marble represents an event omitted by a published. Move them around to see how an operator works."
@@ -69,6 +71,7 @@ struct AboutScreen_Previews: PreviewProvider {
     }
 }
 
+#if os(iOS)
 struct VideoPlayer: UIViewControllerRepresentable {
     
     class Coordinator {
@@ -98,4 +101,4 @@ struct VideoPlayer: UIViewControllerRepresentable {
         Coordinator()
     }
 }
-
+#endif

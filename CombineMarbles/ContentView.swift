@@ -18,24 +18,34 @@ struct ContentView: View {
     ]
 
     var body: some View {
-        NavigationView {
+        NavigationSplitView {
             List {
                 ForEach(content, id: \.name) { section in
-                    Section(header: ListHeader(text: section.name)) {
+                    Section(
+                        header: ListHeader(text: section.name)
+                    ) {
                         ForEach(section.operators, id: \.name) {
-                            NavigationLink($0.name, destination: MarblesScreen(operation: $0))
-                            .font(Font.custom("Menlo", size: 16))
+                            NavigationLink(
+                                $0.name,
+                                destination: MarblesScreen(operation: $0)
+                            )
                         }
                     }
                 }
             }
+#if os(iOS)
             .navigationBarTitle("Operators")
+#endif
             .toolbar(content: {
                 ToolbarItem(placement: .primaryAction) {
-                    Button("help") { displayHelp = true }
+                    Button("Help") { displayHelp = true }
                 }
             })
-        }.sheet(isPresented: $displayHelp, content: {
+            .navigationSplitViewColumnWidth(min: 200, ideal: 300)
+        } detail: {
+            MarblesScreen(operation: content[0].operators[0])
+        }
+        .sheet(isPresented: $displayHelp, content: {
             AboutScreen() { displayHelp = false }
         })
     }
@@ -48,15 +58,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 #endif
-
-struct AboutNavigationStyle: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-        UIViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        if let navigationController = uiViewController.navigationController {
-            navigationController.navigationBar.backgroundColor = .white
-        }
-    }
-}

@@ -3,7 +3,7 @@ import SwiftUI
 
 struct ArrowShape: Shape {
 
-    let headLength: CGFloat = 15
+    let headLength: CGFloat = 12
     func path(in rect: CGRect) -> Path {
         return Path { path in
             path.move(to: CGPoint(x: rect.minX, y: rect.midY))
@@ -17,7 +17,14 @@ struct ArrowShape: Shape {
 
 struct MarbleLane: View {
 
-    @Binding var pos: [TimedEvent]
+    @Binding var positions: [TimedEvent]
+    func positions(excludingIndex: Int) -> [TimedEvent] {
+        var modifiedPositions = positions
+        modifiedPositions.remove(at: excludingIndex)
+        modifiedPositions.removeAll(where: { $0.type != .next })
+        return modifiedPositions
+    }
+
     let isDraggable: Bool
 
     var body: some View {
@@ -26,16 +33,22 @@ struct MarbleLane: View {
 
                 ArrowShape()
                     .stroke(Color.arrowColor)
-                    .frame(width: proxy.size.width, height: 24)
+                    .frame(width: proxy.size.width, height: 20)
                     .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
 
-                ForEach(self.pos) { element in
+                ForEach(self.positions) { element in
                     element.view
-                        .position(x: proxy.denormalize(x: element.pos), y: proxy.size.height / 2)
+                        .position(x: proxy.denormalize(x: element.position), y: proxy.size.height / 2)
                         .gesture(DragGesture().onChanged {
                             guard self.isDraggable else { return }
-                            if let index = self.pos.firstIndex(of: element) {
-                                self.pos[index].pos = proxy.normalize(x: $0.location.x)
+                            guard let index = self.positions.firstIndex(of: element) else { return }
+                            let newPosition = proxy.normalize(x: $0.location.x)
+
+                            let hasNearby = positions(excludingIndex: index).contains(where: {
+                                ($0.position - 0.05...$0.position + 0.05).contains(newPosition)
+                            })
+                            if !hasNearby {
+                                self.positions[index].position = newPosition
                             }
                         })
                         .frame(width: 50, height: 50, alignment: .center)
@@ -84,7 +97,7 @@ private extension GeometryProxy {
 
 private extension TimedEvent {
 
-    var pos: Double {
+    var position: Double {
         get { Double(timeInterval) / 100 }
         set { timeInterval = Int(newValue * 100) }
     }

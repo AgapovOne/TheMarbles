@@ -74,19 +74,25 @@ struct MarblesScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(spacing: 24) {
-                ForEach(0..<state.input.count) {
-                    MarbleLane(pos: self.$state.input[$0], isDraggable: true)
+                ForEach(state.input) {
+                    MarbleLane(positions: $0, isDraggable: true)
                         .frame(height: 44)
                 }
             }
+            HStack {
+                Text("move around")
+                    .font(.footnote)
+                Image(systemName: "hand.point.up.left")
+            }
+                .foregroundColor(.secondary)
+                .padding(.top, 8)
 
             Text(operation.description)
+                .font(.body.monospaced())
                 .padding(.vertical, 32)
-                .padding(.horizontal, 12)
-                .font(Font.custom("Menlo", size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            MarbleLane(pos: $state.output, isDraggable: false)
+            MarbleLane(positions: $state.output, isDraggable: false)
                 .frame(height: 44)
 
             DocumentationLink(
@@ -98,8 +104,10 @@ struct MarblesScreen: View {
             Spacer()
         }
         .padding(.vertical, 36)
-        .padding(.horizontal, 12)
+        .padding(.horizontal)
+        #if os(iOS)
         .navigationBarTitle(operation.name)
+        #endif
         .onAppear { self.state.update() }
     }
 }
@@ -107,7 +115,7 @@ struct MarblesScreen: View {
 //#if DEBUG
 //struct MarblesScreen_Previews: PreviewProvider {
 //    static var previews: some View {
-//        MarblesScreen()
+//        MarblesScreen(operation: )
 //    }
 //}
 //#endif

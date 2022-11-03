@@ -10,12 +10,16 @@ struct DocumentationLink: View {
             Divider().padding(EdgeInsets(top: 16, leading: 0, bottom: 0, trailing: 0))
             Link(destination: URL(string: url)!) {
                 HStack {
-                    Text(" Documentation for ") +
-                        Text(self.name).font(Font.custom("Menlo-Bold", size: 16))
+                    (Text(" Documentation for ") +
+                        Text(self.name)
+                        .font(Font.body.bold().monospaced())
+                    )
+                    .multilineTextAlignment(.leading)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(.foreground)
-                }.padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                }
+                .padding(.vertical, 8)
             }
             Divider()
         }
@@ -23,6 +27,6 @@ struct DocumentationLink: View {
 }
 struct DocumentationLink_Previews: PreviewProvider {
     static var previews: some View {
-        DocumentationLink(name: "map()", url: "")
+        DocumentationLink(name: "tryRemoveDuplicates()", url: "")
     }
 }
