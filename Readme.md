@@ -1,5 +1,9 @@
 # Swift Combine Marbles
 
+Took from https://github.com/robertpalmer/CombineMarbles to improve.
+
+---
+
 Interactive diagrams of swift combine publishers for iOS and macOS. 
 
 

@@ -74,8 +74,8 @@ struct MarblesScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(spacing: 24) {
-                ForEach(state.input) {
-                    MarbleLane(positions: $0, isDraggable: true)
+                ForEach(0..<state.input.count) {
+                    MarbleLane(positions: self.$state.input[$0], isDraggable: true)
                         .frame(height: 44)
                 }
             }
