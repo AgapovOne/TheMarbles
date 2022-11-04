@@ -2,11 +2,15 @@ import SwiftUI
 import Combine
 
 class MarbleViewState: ObservableObject {
+    struct TimedEvents: Identifiable {
+        let id: Int
+        let events: [TimedEvent]
+    }
 
-    private var generator: ([SequancePublisher], SequnceScheduler) -> SequanceEqperimentRunner
+    private var generator: ([SequencePublisher], SequenceScheduler) -> SequenceExperimentRunner
     private var cancellable = Set<AnyCancellable>()
 
-    @Published var input: [[TimedEvent]] {
+    @Published var input: [TimedEvents] {
         didSet {
             update()
         }
@@ -14,16 +18,20 @@ class MarbleViewState: ObservableObject {
 
     @Published var output: [TimedEvent] = []
 
-    init(input: [[TimedEvent]], generator: @escaping ([SequancePublisher], SequnceScheduler) -> SequanceEqperimentRunner) {
+    init(
+        input: [TimedEvents],
+        generator: @escaping ([SequencePublisher], SequenceScheduler) -> SequenceExperimentRunner
+    ) {
         self.input = input
         self.generator = generator
+        update()
     }
 
     func update() {
 
-        let scheduler = SequnceScheduler()
+        let scheduler = SequenceScheduler()
 
-        generator(self.input.map { SequancePublisher(events: $0, scheduler: scheduler) }, scheduler)
+        generator(self.input.map { SequencePublisher(events: $0.events, scheduler: scheduler) }, scheduler)
             .run(scheduler: scheduler)
             .receive(on: RunLoop.main)
             .assign(to: \.output, on: self)
@@ -36,11 +44,11 @@ extension TupleOperator {
     var state: MarbleViewState {
 
         return MarbleViewState(
-            input: [input1, input2],
+            input: [.init(id: 0, events: input1), .init(id: 1, events: input2)],
             generator: { publisher, _ in
 
                 let combined = self.operation(publisher[0], publisher[1])
-                return SequanceExperiment(publisher: combined)
+                return SequenceExperiment(publisher: combined)
             }
         )
     }
@@ -51,10 +59,10 @@ extension SingleOperator {
     var state: MarbleViewState {
 
         return MarbleViewState(
-            input: [input],
+            input: [.init(id: 0, events: input)],
             generator: { publisher, scheduler in
                 let combined = self.operation(publisher[0], scheduler)
-                return SequanceExperiment(publisher: combined)
+                return SequenceExperiment(publisher: combined)
             }
         )
     }
@@ -74,8 +82,23 @@ struct MarblesScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(spacing: 24) {
-                ForEach(0..<state.input.count) {
-                    MarbleLane(positions: self.$state.input[$0], isDraggable: true)
+                ForEach(state.input) { events in
+                    MarbleLane(
+                        positions: .init(
+                            get: { events.events },
+                            set: { newValue in
+                                state.input = state.input.map {
+                                    .init(
+                                        id: $0.id,
+                                        events: $0.id == events.id
+                                        ? newValue
+                                        : $0.events
+                                    )
+                                }
+                            }
+                        ),
+                        isDraggable: true
+                    )
                         .frame(height: 44)
                 }
             }

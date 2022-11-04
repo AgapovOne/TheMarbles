@@ -26,11 +26,11 @@
 		305BCEAB2300B48F0063C458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 305BCEAA2300B48F0063C458 /* Assets.xcassets */; };
 		305BCEAE2300B48F0063C458 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 305BCEAD2300B48F0063C458 /* Preview Assets.xcassets */; };
 		305BCEBB230347FC0063C458 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEBA230347FC0063C458 /* Event.swift */; };
-		305BCEBD23034ED60063C458 /* SequancePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEBC23034ED60063C458 /* SequancePublisher.swift */; };
+		305BCEBD23034ED60063C458 /* SequencePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEBC23034ED60063C458 /* SequencePublisher.swift */; };
 		305BCEBF230350C90063C458 /* Marble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEBE230350C90063C458 /* Marble.swift */; };
 		305BCEC12303526C0063C458 /* MarbleLane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEC02303526C0063C458 /* MarbleLane.swift */; };
-		305BCEC323048AA50063C458 /* SequnceScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEC223048AA50063C458 /* SequnceScheduler.swift */; };
-		305BCEC523052DC50063C458 /* SequanceExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEC423052DC50063C458 /* SequanceExperiment.swift */; };
+		305BCEC323048AA50063C458 /* SequenceScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEC223048AA50063C458 /* SequenceScheduler.swift */; };
+		305BCEC523052DC50063C458 /* SequenceExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEC423052DC50063C458 /* SequenceExperiment.swift */; };
 		305BCEC923052E490063C458 /* MarblesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCEC823052E490063C458 /* MarblesScreen.swift */; };
 		305BCECC230530BE0063C458 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCECB230530BE0063C458 /* Operator.swift */; };
 		305BCECE23073E830063C458 /* CombineOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305BCECD23073E830063C458 /* CombineOperators.swift */; };
@@ -63,11 +63,11 @@
 		305BCEAD2300B48F0063C458 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		305BCEB22300B48F0063C458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		305BCEBA230347FC0063C458 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		305BCEBC23034ED60063C458 /* SequancePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequancePublisher.swift; sourceTree = "<group>"; };
+		305BCEBC23034ED60063C458 /* SequencePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencePublisher.swift; sourceTree = "<group>"; };
 		305BCEBE230350C90063C458 /* Marble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marble.swift; sourceTree = "<group>"; };
 		305BCEC02303526C0063C458 /* MarbleLane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleLane.swift; sourceTree = "<group>"; };
-		305BCEC223048AA50063C458 /* SequnceScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequnceScheduler.swift; sourceTree = "<group>"; };
-		305BCEC423052DC50063C458 /* SequanceExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequanceExperiment.swift; sourceTree = "<group>"; };
+		305BCEC223048AA50063C458 /* SequenceScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceScheduler.swift; sourceTree = "<group>"; };
+		305BCEC423052DC50063C458 /* SequenceExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExperiment.swift; sourceTree = "<group>"; };
 		305BCEC823052E490063C458 /* MarblesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarblesScreen.swift; sourceTree = "<group>"; };
 		305BCECB230530BE0063C458 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		305BCECD23073E830063C458 /* CombineOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOperators.swift; sourceTree = "<group>"; };
@@ -161,9 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				305BCEBA230347FC0063C458 /* Event.swift */,
-				305BCEBC23034ED60063C458 /* SequancePublisher.swift */,
-				305BCEC223048AA50063C458 /* SequnceScheduler.swift */,
-				305BCEC423052DC50063C458 /* SequanceExperiment.swift */,
+				305BCEBC23034ED60063C458 /* SequencePublisher.swift */,
+				305BCEC223048AA50063C458 /* SequenceScheduler.swift */,
+				305BCEC423052DC50063C458 /* SequenceExperiment.swift */,
 				30149056230DED9400AEA679 /* OperatorCollection.swift */,
 			);
 			path = Model;
@@ -275,11 +275,11 @@
 				303E37092342A2D20013B78E /* DocumentationLink.swift in Sources */,
 				305BCED3230BC28A0063C458 /* Finished.swift in Sources */,
 				30149059230DF89600AEA679 /* FilterOperators.swift in Sources */,
-				305BCEBD23034ED60063C458 /* SequancePublisher.swift in Sources */,
+				305BCEBD23034ED60063C458 /* SequencePublisher.swift in Sources */,
 				305BCECC230530BE0063C458 /* Operator.swift in Sources */,
-				305BCEC323048AA50063C458 /* SequnceScheduler.swift in Sources */,
+				305BCEC323048AA50063C458 /* SequenceScheduler.swift in Sources */,
 				3035CC4B230FBEA800610A4A /* MatchingOperators.swift in Sources */,
-				305BCEC523052DC50063C458 /* SequanceExperiment.swift in Sources */,
+				305BCEC523052DC50063C458 /* SequenceExperiment.swift in Sources */,
 				305BCECE23073E830063C458 /* CombineOperators.swift in Sources */,
 				305BCEBF230350C90063C458 /* Marble.swift in Sources */,
 				308C8502261721F6005DA6F1 /* Font+Styleguide.swift in Sources */,

@@ -5,12 +5,12 @@ struct FailureString: Error, Equatable {
     let content: String
 }
 
-struct SequancePublisher: Publisher {
+struct SequencePublisher: Publisher {
 
     private let events: [TimedEvent]
-    private let scheduler: SequnceScheduler
+    private let scheduler: SequenceScheduler
 
-    init(events: [TimedEvent], scheduler: SequnceScheduler) {
+    init(events: [TimedEvent], scheduler: SequenceScheduler) {
         self.events = events
         self.scheduler = scheduler
     }
@@ -27,11 +27,11 @@ struct SequancePublisher: Publisher {
     private class SequanceSubscription<S>: Subscription where S : Subscriber, Failure == S.Failure, S.Input == Output {
 
         var subscriber: S?
-        let scheduler: SequnceScheduler
+        let scheduler: SequenceScheduler
         let events: [TimedEvent]
         var emitted: Int = 0
 
-        init(events: [TimedEvent], subscriber: S, scheduler: SequnceScheduler) {
+        init(events: [TimedEvent], subscriber: S, scheduler: SequenceScheduler) {
             self.events = events
             self.subscriber = subscriber
             self.scheduler = scheduler

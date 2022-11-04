@@ -1,15 +1,15 @@
 import Foundation
 import Combine
 
-protocol SequanceEqperimentRunner {
-    func run(scheduler: SequnceScheduler) -> Future<[TimedEvent], Never>
+protocol SequenceExperimentRunner {
+    func run(scheduler: SequenceScheduler) -> Future<[TimedEvent], Never>
 }
 
-struct SequanceExperiment<P: Publisher>: SequanceEqperimentRunner where P.Failure == FailureString, P.Output == String {
+struct SequenceExperiment<P: Publisher>: SequenceExperimentRunner where P.Failure == FailureString, P.Output == String {
 
     let publisher: P
 
-    func run(scheduler: SequnceScheduler) -> Future<[TimedEvent], Never>  {
+    func run(scheduler: SequenceScheduler) -> Future<[TimedEvent], Never>  {
 
         return Future { callback in
             var cancellable: Cancellable?

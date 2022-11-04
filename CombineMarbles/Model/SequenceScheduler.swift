@@ -1,10 +1,10 @@
 import Foundation
 import Combine
 
-class SequnceScheduler: Scheduler {
+class SequenceScheduler: Scheduler {
 
-    var now: SequnceScheduler.Time = Time(value: 0)
-    var minimumTolerance: SequnceScheduler.Time.Stride = 0
+    var now: SequenceScheduler.Time = Time(value: 0)
+    var minimumTolerance: SequenceScheduler.Time.Stride = 0
 
     private var scheduled: [ScheduledAction] = []
 
@@ -35,7 +35,7 @@ class SequnceScheduler: Scheduler {
         }
     }
 
-    func schedule(after date: SequnceScheduler.Time, interval: Int64, tolerance: Int64, options: String?, _ action: @escaping () -> Void) -> Cancellable {
+    func schedule(after date: SequenceScheduler.Time, interval: Int64, tolerance: Int64, options: String?, _ action: @escaping () -> Void) -> Cancellable {
 
         let action = ScheduledAction(time: date, interval: interval, action: action)
         append(action)
@@ -47,7 +47,7 @@ class SequnceScheduler: Scheduler {
         })
     }
 
-    func schedule(after date: SequnceScheduler.Time, tolerance: Int64, options: String?, _ action: @escaping () -> Void) {
+    func schedule(after date: SequenceScheduler.Time, tolerance: Int64, options: String?, _ action: @escaping () -> Void) {
         guard now < date else { return }
 
         append(ScheduledAction(time: date, action: action))
@@ -88,18 +88,18 @@ class SequnceScheduler: Scheduler {
     }
 }
 
-extension SequnceScheduler.Time: Strideable {
+extension SequenceScheduler.Time: Strideable {
 
-    func distance(to other: SequnceScheduler.Time) -> Int64 {
+    func distance(to other: SequenceScheduler.Time) -> Int64 {
         return Int64(other.value - value)
     }
 
-    func advanced(by n: Int64) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: value + Int64(n))
+    func advanced(by n: Int64) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: value + Int64(n))
     }
 }
 
-extension SequnceScheduler.Time: SignedNumeric {
+extension SequenceScheduler.Time: SignedNumeric {
 
     init(integerLiteral value: Int32) {
         self.init(value: Int64(value))
@@ -109,51 +109,51 @@ extension SequnceScheduler.Time: SignedNumeric {
         self.init(value: Int64(source))
     }
 
-    static func + (lhs: SequnceScheduler.Time, rhs: SequnceScheduler.Time) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: lhs.value + rhs.value)
+    static func + (lhs: SequenceScheduler.Time, rhs: SequenceScheduler.Time) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: lhs.value + rhs.value)
     }
 
-    static func -= (lhs: inout SequnceScheduler.Time, rhs: SequnceScheduler.Time) {
+    static func -= (lhs: inout SequenceScheduler.Time, rhs: SequenceScheduler.Time) {
         lhs.value -= rhs.value
     }
 
-    static func += (lhs: inout SequnceScheduler.Time, rhs: SequnceScheduler.Time) {
+    static func += (lhs: inout SequenceScheduler.Time, rhs: SequenceScheduler.Time) {
         lhs.value += rhs.value
     }
 
-    static func * (lhs: SequnceScheduler.Time, rhs: SequnceScheduler.Time) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: lhs.value * rhs.value)
+    static func * (lhs: SequenceScheduler.Time, rhs: SequenceScheduler.Time) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: lhs.value * rhs.value)
     }
 
-    static func *= (lhs: inout SequnceScheduler.Time, rhs: SequnceScheduler.Time) {
+    static func *= (lhs: inout SequenceScheduler.Time, rhs: SequenceScheduler.Time) {
         lhs.value *= rhs.value
     }
 
-    static func - (lhs: SequnceScheduler.Time, rhs: SequnceScheduler.Time) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: lhs.value - rhs.value)
+    static func - (lhs: SequenceScheduler.Time, rhs: SequenceScheduler.Time) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: lhs.value - rhs.value)
     }
 }
 
-extension SequnceScheduler.Time: SchedulerTimeIntervalConvertible {
+extension SequenceScheduler.Time: SchedulerTimeIntervalConvertible {
 
-    static func seconds(_ s: Int) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: Int64(s) * 1000  * 1000 * 1000)
+    static func seconds(_ s: Int) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: Int64(s) * 1000  * 1000 * 1000)
     }
 
-    static func seconds(_ s: Double) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: Int64(s) * 1000  * 1000 * 1000)
+    static func seconds(_ s: Double) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: Int64(s) * 1000  * 1000 * 1000)
     }
 
-    static func milliseconds(_ ms: Int) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: Int64(ms) * 1000 * 1000)
+    static func milliseconds(_ ms: Int) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: Int64(ms) * 1000 * 1000)
     }
 
-    static func microseconds(_ us: Int) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: Int64(us) * 1000)
+    static func microseconds(_ us: Int) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: Int64(us) * 1000)
     }
 
-    static func nanoseconds(_ ns: Int) -> SequnceScheduler.Time {
-        return SequnceScheduler.Time(value: Int64(ns))
+    static func nanoseconds(_ ns: Int) -> SequenceScheduler.Time {
+        return SequenceScheduler.Time(value: Int64(ns))
     }
 }
 
